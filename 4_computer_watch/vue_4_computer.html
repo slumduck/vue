@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性的setter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="computer">
+    <h3>默认计算属性只有get方法，只能获取值，可以手动添加set方法</h3>
+    <div>{{firstName}}</div>
+    <div>{{lastName}}</div>
+    <div>{{fullName}}</div>
+</div>
+<script type="application/ecmascript">
+    var computer = new Vue({
+        el: '#computer',
+        data: function () {
+            return {
+                firstName:'step',
+                lastName:'curry',
+                //fullName:''//data中的属性会覆盖同名计算属性中的值
+            }
+        },
+        computed:{
+            fullName:{
+                get:function () {
+                    return this.firstName + this.lastName;
+                },
+                set:function (newValue) {
+                    //在这里可以修改计算属性管理的属性
+                    var names = newValue.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1];
+                }
+            }
+            /*
+            fullName:function () {
+                return this.firstName + this.lastName;
+            }
+            */
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性vs方法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="example">
+    <h3>计算属性是基于它们的依赖进行缓存的。计算属性只有在它的相关依赖发生改变时才会重新求值</h3>
+    <h3>计算属性是做为vue实例的一个属性，方法是做一个方法执行，调用方式不一样</h3>
+    <h3>方法和计算属性不可重名，否则计算属性无法正常工作</h3>
+    <p>computed reversed message: "{{ reversedMessage_ }}"</p>
+    <p>methods reversed message: "{{ reversedMessage() }}"</p>
+</div>
+<script type="application/ecmascript">
+    var vm = new Vue({
+        el: '#example',
+        data: {
+            message: 'Hello'
+        },
+        computed: {
+            reversedMessage_: function () {
+                // `this` 指向 vm 实例
+                return this.message.split('').reverse().join('')
+            }
+        },
+        methods:{
+            reversedMessage: function () {
+                // `this` 指向 vm 实例
+                return this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+</body>
+</html>

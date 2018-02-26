@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript表达式</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<h3>JavaScript表达式</h3>
+<div id="app">
+    <h4>1.'{{number+1}}'</h4>
+    <label>算术表达式：</label><span>{{number+1}}</span>
+    <h4>2.'{{ ok ? 'YES' : 'NO' }}'</h4>
+    <label>三元表达式：</label><span>{{ ok ? 'YES' : 'NO' }}</span>
+    <h4>2.'{{ message.split('').reverse().join('') }}'</h4>
+    <label>函数执行：</label><span>{{ message.split('').reverse().join('') }}</span>
+    <h4>2."<div v-bind:id="'list-' + id"></div>"</h4>
+    <label>字符串拼接：</label><span v-bind:id="message.split('').reverse().join('')">{{message + 'id'}}</span>
+
+</div>
+<script type="application/ecmascript">
+    var app = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                id:'',
+                number:2,
+                ok:true,
+                message:"hello vue"
+            }
+        }
+    });
+</script>
+</body>
+</html>

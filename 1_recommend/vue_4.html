@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>处理用户输入</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<div id="app-1">
+    <p>{{message}}</p>
+    <button v-on:click="t">测试data中的方法</button>
+    <button v-on:click="reverseMessage">反转字符串</button>
+</div>
+<hr>
+<div id="app-2">
+    <h3>{{message}}</h3>
+    <input v-model="message" />
+</div>
+<script type="application/ecmascript">
+    /*
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello vue'
+        }
+    });
+    */
+    var app1 = new Vue({
+        el: '#app-1',
+        data: function () {
+            return {
+                message: 'hello vue.js',
+                t:function (){
+                    //此处的this指向已被vue更改，不指向该return的返回对象，指向window（顶层对象）
+                    //故data中不要写方法,否则你需要正确的获取对象才可以
+                    console.log(this.message);
+                    var temp = this.app1;
+                    console.log(temp);
+                    temp.message = temp.message.split('').reverse().join('');////可以实现动态绑定
+                    //this.app1.message = this.app1.message.split('').reverse().join('');//可以实现动态绑定
+                    /**
+                     *无法实现动态绑定
+                     */
+                    //var temp = this.app1.message;
+                    //temp = temp.split('').reverse().join('');
+                }
+            }
+        },
+        methods:{
+            reverseMessage:function () {
+                this.message = this.message.split('').reverse().join('');
+            }
+        }
+    });
+    var app2 = new Vue({
+        el: '#app-2',
+        data: function () {
+            return {
+                message:''
+            }
+        }
+    });
+    var app3 = {
+        a:"message",
+        b:function () {
+            //对比vue中的data的属性里面的function的this指向
+            //此处指向当前对象app3
+            console.log(this.a);
+        }
+    };
+    app3.b();
+</script>
+</body>
+</html>

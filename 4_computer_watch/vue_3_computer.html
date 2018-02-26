@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性 vs 侦听属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="watch">
+    <h3>侦听属性</h3>
+    <span>{{fullName}}</span>
+</div>
+<div id="computer">
+    <h3>计算属性</h3>
+    <span>{{fullName}}</span>
+</div>
+<script type="application/ecmascript">
+    var watch = new Vue({
+        el: '#watch',
+        data: function () {
+            return {
+                firstName: 'Foo',
+                lastName: 'Bar',
+                fullName: 'Foo Bar'
+            }
+        },
+        watch:{
+            firstName:function (val) {
+                this.fullName = val + this.lastName
+            },
+            lastName:function (val) {
+                this.fullName = this.firstName + val
+            },
+            fullName:function () {
+                
+            }
+        }
+    });
+    var computer = new Vue({
+        el: '#computer',
+        data: function () {
+            return {
+                firstName:'step',
+                lastName:'curry',
+                fullName:''//data中的属性会覆盖同名计算属性中的值
+            }
+        },
+        computed:{
+            fullName:function () {
+                return this.firstName + this.lastName;
+            }
+        }
+    });
+</script>
+</body>
+</html>

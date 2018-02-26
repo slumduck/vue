@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>特性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<h3>Mustache 语法,不能作用于HTML特性上，及不能在属性上使用{{variable}}语法</h3>
+<div id="app">
+    <span>下面div元素的id属性通过v-bind指令绑定</span>
+    <div v-bind:id="dynamicId">{{dynamicId}}</div>
+    <button disabled>原生 Button</button>
+    <button v-bind:disabled="isButtonDisabled">Button</button>
+    <h4>如果 isButtonDisabled 的值是 null、undefined 或 false，则 disabled 特性甚至不会被包含在渲染出来的 'button' 元素中。</h4>
+    <span>通过下面例子，验证对于null,undefined,false均不会在元素上出现disable的属性</span>
+    <button v-bind:disabled="a">null</button>
+    <button v-bind:disabled="b">undefined</button>
+    <button v-bind:disabled="c">false</button>
+</div>
+<script type="application/ecmascript">
+    var app = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                a:null,
+                b:undefined,
+                c:false,
+                isButtonDisabled:true,
+                dynamicId:'dynamicId',
+                message: '<span style="color: red">This should be red.</span>'
+            }
+        }
+    });
+</script>
+</body>
+</html>
